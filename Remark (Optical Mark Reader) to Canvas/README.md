@@ -14,13 +14,13 @@ The purpose of this script is to facilitate the process of formatting the grades
 
 * Remark OMR output file
 
-You will need to install the additional libraries using the command **pip install -r requirements.txt**
+You will need to install the additional libraries using the command `pip install -r requirements.txt`
 
 ## Running the Script
 
 1. Download or clone the repository onto your local machine.
 
-1. Add your Canvas API Token to the canvas.cfg file.
+1. Add your Canvas API Token to the `canvas.cfg` file.
 
 1. Place the Remark OMR output file in the same directory as this script. Open the file and ensure that:
 
@@ -32,9 +32,9 @@ You will need to install the additional libraries using the command **pip instal
 
    * Any extra columns like **T-Score** have been removed.
 
-1. Run omr\_to\_canvas.py and it will prompt you for your course ID and the filename of the Remark OMR CSV file. Note that this is a command-line tool, so there is no graphic user interface. You can run the program in a terminal window or a Python IDE.
+1. Run `omr_to_canvas.py` and it will prompt you for your course ID and the filename of the Remark OMR CSV file. Note that this is a command-line tool, so there is no graphical user interface. You can run the program in a terminal window or a Python IDE.
 
-1. When the script has finished running a file (Import_into_Canvas.csv) will be generated in the same directory as the script. This file can be imported into the Canvas Gradebook. If any students in the input file were not found in your course, an ERROR_LOG text file will also be generated. You can enter the grades for these students manually.
+1. When the script has finished running a file `Import_into_Canvas.csv` will be generated in the same directory as the script. This file can be imported into the Canvas Gradebook. If any students in the input file were not found in your course, an ERROR_LOG text file will also be generated. You can enter the grades for these students manually.
 
 ## Additional Information
 
