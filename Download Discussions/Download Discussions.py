@@ -214,20 +214,25 @@ def FIPPA(fippaDecision, topicDetails, studentList):
         sortDecision = input("Do you wish to sort by first, last name, or student number? (first/last/number, default=first): ").strip()
         #Basic loop to make sure a proper sorting decision is made
         if sortDecision not in 'first' or sortDecision not in 'last' or sortDecision not in 'number':
-            while sortDecision not in 'first' or sortDecision not in 'last' or sortDecision not in 'number':
+            while sortDecision not in 'first' and sortDecision not in 'last' and sortDecision not in 'number':
                 sortDecision = input("Do you wish to sort by first, last name, or student number? (first/last/number, default=first): ").strip()
 
+        outputFile["FirstName"] = outputFile["StudentName"].str.split().str[0]
+        outputFile["LastName"] = outputFile["StudentName"].str.split().str[-1]       
+        outputFile = outputFile.drop('StudentName', axis=1)
+        cols = outputFile.columns.tolist()
+        newcols = cols[-1:] + cols[-2:-1] + cols[0:1] + cols[1:-2]
+        outputFile = outputFile[newcols]
+        
         #If sort by first name, sort first by first name then by student number
         if sortDecision in 'first':
-            outputFile = outputFile.sort_values(['StudentName', 'SIS_ID'])
+            outputFile = outputFile.sort_values(['FirstName', 'LastName', 'SIS_ID'])
         #If sort by last name, create column for last substring in, then sort by that substring followed by first name then student number. Finally remove substring column
         elif sortDecision in 'last':
-            outputFile["Suffix"] = outputFile["StudentName"].str.split().str[-1]
-            outputFile = outputFile.sort_values(['Suffix', 'StudentName', 'SIS_ID'])
-            outputFile = outputFile.drop(['Suffix'], axis=1)
+            outputFile = outputFile.sort_values(['LastName', 'FirstName', 'SIS_ID'])
         #If sort by student number, just sort by student number
         elif sortDecision in 'number':
-            outputFile = outputFile.sort_values(['SIS_ID'])
+            outputFile = outputFile.sort_values(['SIS_ID', 'LastName', 'FirstName'])
 
     #Return output file
     return outputFile    
